@@ -411,8 +411,6 @@ console.log(someRecursive([4,6,8], val => val > 10)); // false
 // Write a recursive function called flatten which accepts an array of arrays and returns
 // a new array with all values flattened.
 
-
-
 function flatten(arr){
 	let newArr = [];
 	for (let i = 0; i < arr.length; i++) {
@@ -442,7 +440,7 @@ console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]])); // [1,2,3]
 ///////YOU SOLVED THIS ONE ALL ON YOUR OWN - WAY TO GO!!!//////
 function capitalizeFirst(arrStr){
 	let capArr = [];
-	let FirstCaps = '';
+	let firstCaps = '';
 
 	for (let i = 0; i < arrStr.length; i++){
 		if (arrStr[i][0] === arrStr[i][0].toUpperCase()){
@@ -473,10 +471,171 @@ console.log(myArray[0].charAt(0).toUpperCase() + myArray[0].substring(1));
 
 
 ///TESTING METHODS///
-myArray = myArray.concat(myArray[0][0].toUpperCase());
-console.log(myArray);
-console.log(myArray[0][0]);
-console.log(myArray[1][0].toUpperCase());
-console.log(myArray[1][0]);
-console.log(myArray[2][0].toUpperCase());
-console.log(myArray[2][0]);
+// myArray = myArray.concat(myArray[0][0].toUpperCase());
+// console.log(myArray);
+// console.log(myArray[0][0]);
+// console.log(myArray[1][0].toUpperCase());
+// console.log(myArray[1][0]);
+// console.log(myArray[2][0].toUpperCase());
+// console.log(myArray[2][0]);
+
+
+
+
+
+
+//nestedEvenSum======================================================================
+// Write a recursive function called nestedEvenSum. Return the sum of all even numbers
+// in an object which may contain nested objects.
+
+// function eachRecursive(obj)
+// {
+//     for (var k in obj)
+//     {
+//         if (typeof obj[k] == "object" && obj[k] !== null)
+//             eachRecursive(obj[k]);
+//         else
+//             // do something... 
+//     }
+// }
+
+
+function nestedEvenSum (obj) {
+
+	// let result = [];
+
+////RECURSIVE OBJECT ITERATION//////
+	// let inner = {};
+
+	// for (let i in obj){
+
+	// 	if (typeof obj[i] == "object" && obj[i] !== null) {
+
+	// 		console.log("here is obj[i]: ", obj[i]);
+
+	// 		inner = obj[i];
+
+
+
+	// 	} else {
+
+	// 		console.log('ELSE BLOCK REACHED');
+
+	// 		break;
+
+	// 	};
+	// }
+	// return nestedEvenSum(inner);
+
+
+/////////////YOU WERE MAKING SOME PROGRESS HERE BELOW (ITERATIVELY/NESTED LOOPS//////////
+	let evenNums = [];
+
+	let sum = null;
+
+	for (let k in obj){
+
+		if (typeof obj[k] === 'number' && obj[k] % 2 === 0){
+
+			let outerNum = obj[k];
+
+			evenNums.push(outerNum);
+
+			for (let i = 0; i < evenNums.length; i++){
+
+				return sum += evenNums[i];
+			}
+
+		} 
+
+		if (typeof obj[k] === 'object' && obj[k] !== null){
+
+				console.log("hitting block? ELSE IF");
+
+				let innerObj = obj[k];
+
+				obj = innerObj;
+
+		} else {
+
+			console.log("hitting block? ELSE");
+
+			let innerObj = obj[k];
+
+			for (let v in innerObj){
+
+				if (typeof innerObj[v] === 'object' && innerObj[v] !== null){
+
+					let inInnerObj = innerObj[v];
+
+					obj = inInnerObj;
+
+				}
+
+
+			}
+
+		}
+
+	}
+
+	return nestedEvenSum(obj);
+
+}
+
+
+var obj1 = {
+  outer: 2,
+  obj: {
+    inner: 2,
+    otherObj: {
+      superInner: 2,
+      notANumber: true,
+      alsoNotANumber: "yup"
+    }
+  }
+}
+
+var obj2 = {
+  a: 2,
+  b: {b: 2, bb: {b: 3, bb: {b: 2}}},
+  c: {c: {c: 2}, cc: 'ball', ccc: 5},
+  d: 1,
+  e: {e: {e: 2}, ee: 'car'}
+};
+
+// console.log(nestedEvenSum(obj1)); // 6
+// console.log(nestedEvenSum(obj2)); // 10
+
+//////you haven't gotten this one finished yet....//////////////////////////////////
+
+
+function capitalizeWords (arr) {
+
+  let newArr = [];
+  
+  for (let i = 0; i < arr.length; i++){
+      if (arr[i] === arr[i].toUpperCase()) {
+      	console.log(arr);
+      	return arr;
+      } else {
+
+          newArr = arr.concat(arr.slice(0, 3) + "," + arr[i].toUpperCase());
+
+      }
+  }
+  return capitalizeWords(newArr);
+}
+
+let words = ['i', 'am', 'learning', 'recursion'];
+capitalizeWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
+
+
+
+//////capitalizeWords////////////////////////////////////////////////////////////////
+//Write a recursive function called capitalize words. Given an array of words, return
+//a new array containing each word capitalized
+
+
+
